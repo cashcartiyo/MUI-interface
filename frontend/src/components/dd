@@ -1,0 +1,92 @@
+
+import styled from '@emotion/styled'
+import { AppBar, Avatar, Badge, Box, InputBase, Menu, MenuItem, Toolbar, Typography } from '@mui/material'
+import React from 'react'
+import MailIcon from '@mui/icons-material/Mail'
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import SmsIcon from '@mui/icons-material/Sms';
+import { useState } from 'react';
+
+//couztamization of toolbar is it sticks to the top or there is a space between the content or nah 
+const StyledToolBar = styled(Toolbar)({
+  display: 'felx',
+  justifyContent: 'space-between',
+})
+// Couytumayitaion of search box
+const Search = styled("div")(() => ({
+  backgroundColor: 'white',
+  padding: '0 10px',
+  borderRadius: '10px',
+  width: '40%'
+}))
+
+//styled icons
+const Icons = styled(Box)(() => ({
+  display: 'none',
+  alignItems: 'center',
+  gap: '20px'
+}))
+// styled UserBox 
+const UserBox = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '10px',
+  
+
+}))
+
+
+const Navbar = () => {
+  const [open, setOpen] = useState(false)
+  return (
+    <AppBar position="sticky">
+      <StyledToolBar>
+        <Typography variant="h6" sx={{ display: { xs: 'none', sm: "block" } }}>Chatapp</Typography>
+        <SmsIcon sx={{ display: { xs: 'block', sm: "none" } }} />
+        <Search><InputBase placeholder='search...' /></Search>
+        <Icons>
+          <Badge badgeContent={4} color="error">
+            <MailIcon />
+          </Badge>
+          <Badge badgeContent={2} color="success">
+            <NotificationsIcon />
+          </Badge>
+          <Avatar
+            sx={{ width: 30, height: 30 }}
+            src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            onClick={(e) => setOpen(true)}
+          />
+          </Icons>
+
+        <UserBox onClick={e => setOpen(true)}>
+          <Avatar
+            sx={{ width: 30, height: 30 }}
+            src='https://scontent-vie1-1.xx.fbcdn.net/v/t31.18172-8/1147590_718281471515909_3805507_o.jpg?stp=cp0_dst-jpg_e15_q65_s320x320&_nc_cat=101&ccb=1-7&_nc_sid=e007fa&_nc_ohc=awwdpognY-8AX9camfP&_nc_ht=scontent-vie1-1.xx&oh=00_AfA_-n8-z9478LKxHGWenDQRfFk3YC6i6uTjxH6x1P5xjA&oe=639E474D'
+            onClick={e => setOpen(true)}
+          />
+
+          <Typography variant='span'>Gergő</Typography>
+        </UserBox>
+      </StyledToolBar>
+      <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        open={open}
+        onClose={(e) => setOpen(false)}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <MenuItem component='a' href='#profile'>Profile</MenuItem>
+        <MenuItem component='a' href='#logout'>Logout</MenuItem>
+      </Menu>
+    </AppBar>
+  )
+}
+
+export default Navbar
